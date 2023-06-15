@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Gor Sayadyan](https://up.htmlacademy.ru/javascript/29/user/817483).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Конотоп](https://htmlacademy.ru/profile/sineway).
 
 ---
 
