@@ -16,22 +16,42 @@ const message = [
 ];
 
 let id = 0;
+const LENGTH = 25;
 
+const generateId = () => ++id;
+
+const GENERATE_NAME = [
+  'Mask',
+  'Alyona',
+  'Dima',
+  'Zhenya',
+  'Rodya'
+];
+
+const getAuthorsName = (items, index) => {
+  index = 0;
+  for(let i = 0; i <= index; i++) {
+    index += i;
+  }
+  return items[index];
+};
 /**
  * @param {Number} length
  * @returns {Array}
  */
-function createPictureArray(length = 25) {
+function createPictureArray(length) {
   const array = new Array(length).fill().map((item) => createPicture(item));
   return array;
 }
-console.log(createPictureArray());
+createPictureArray(LENGTH);
+console.log(createPictureArray(LENGTH));
 
 /**
  * @param {number} id
  * @returns {Picture}
  */
 function createPicture() {
+  const NAMES = getAuthorsName(GENERATE_NAME);
   const avatar = `img/avatar-${id}.svg`; // генерацию идентификатора в аватар чуточку позже допишу, там нужно от 1 до 6 сформировать
   id = generateId();
   const url = `photos/${id}.jpg`;
@@ -39,27 +59,20 @@ function createPicture() {
   const likes = generateLikesInteger(15, 200);
   const comments = createPictureComment();
 
-  return {avatar, id, url, descriptionArray, likes, comments};
+  return {NAMES, avatar, id, url, descriptionArray, likes, comments};
 }
-console.log(createPicture())
+createPicture();
+console.log(createPicture());
 /**
  * @param {Array} items
  * @returns {string}
  */
 function pickItems(items) {
   const randomIndex = Math.floor(Math.random() * items.length);
-  const randomElement = items[randomIndex];
-  return randomElement;
+
+  return items[randomIndex];
 }
 pickItems(description);
-
-/**
- * @returns {Number} id
- */
-function generateId () {
-  id++;
-  return id;
-}
 
 /**
  * @param {number} min
@@ -90,8 +103,7 @@ createPictureCommentsArray(message);
  */
 function createPictureComment() {
   const randomIndex = Math.floor(Math.random() * message.length);
-  const randomElement = message[randomIndex];
-  const result = randomElement;
+  const result = message[randomIndex];
 
   return result;
 }
