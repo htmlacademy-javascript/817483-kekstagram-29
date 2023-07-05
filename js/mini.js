@@ -4,10 +4,18 @@ const pictureContainer = document.querySelector('.pictures');
  */
 const pictureThumbnail = document.querySelector('#picture');
 
-
+// Пытаюсь разобраться в JSDoc, пока не совсем верно проставляю, думаю
+/**
+ * 
+ * @prop {Array} comments
+ * @prop {number} likes
+ * @prop {string} url
+ * @prop {string} description
+ * @returns {Object} thumbnail
+ */
 const createTemplate = ({comments, likes, url, description}) => {
 
-  const thumbnail = pictureThumbnail.content.cloneNode(true);
+  const thumbnail = /** @type {HTMLAnchorElement} */ (pictureThumbnail.content.cloneNode(true));
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.querySelector('.picture__img').alt = description;
   thumbnail.querySelector('.picture__comments').textContent = comments.length;

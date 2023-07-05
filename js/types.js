@@ -1,7 +1,7 @@
 /** \
- * @typedef Picture
- * @param { number } id
- * @param { string } url
- * @param { string } description
- * @param { Array } comments 
+ * @typedef createTemplate
+ * @prop { number } id
+ * @prop { string } url
+ * @prop { string } description
+ * @prop { Array } comments
  */
