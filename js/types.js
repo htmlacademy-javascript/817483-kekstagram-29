@@ -5,3 +5,7 @@
  * @prop { string } description
  * @prop { Array } comments
  */
+
+/** /
+ * @typedef pictureComments
+ */
