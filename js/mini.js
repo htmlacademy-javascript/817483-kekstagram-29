@@ -1,13 +1,12 @@
 import renderModal from './render-modal.js';
+import { renderPopups } from './gallery-popup.js';
 const pictureContainer = document.querySelector('.pictures');
 /**
  * @type {HTMLTemplateElement}
  */
 const pictureThumbnail = document.querySelector('#picture');
 
-// Пытаюсь разобраться в JSDoc, пока не совсем верно проставляю, думаю
 /**
- * 
  * @prop {Array} comments
  * @prop {number} likes
  * @prop {string} url
@@ -24,6 +23,7 @@ const createTemplate = (data) => {
 
   thumbnail.addEventListener('click', (event)=> {
     event.preventDefault();
+    renderPopups(data);
     renderModal(data);
   });
   return thumbnail;
@@ -33,14 +33,3 @@ function createThumbnail(data) {
   pictureContainer.append(...data.map(createTemplate));
 }
 export { createThumbnail };
-// const renderPictures = (pictures) => {
-//   const fragment = document.createDocumentFragment();
-
-//   pictures.forEach(item=> {
-//     const thumbnail = createTemplate(item);
-//     fragment.append(thumbnail);
-//   });
-//   pictureContainer.append(fragment);
-// };
-
-// export { renderPictures, createTemplate };
