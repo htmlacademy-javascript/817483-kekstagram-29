@@ -24,7 +24,6 @@ const getAuthorsName = (items, index) => {
 };
 
 
-
 export function pickItems(items) {
   const randomIndex = Math.floor(Math.random() * items.length);
 
@@ -33,19 +32,15 @@ export function pickItems(items) {
 pickItems(description);
 
 
-
 const createPicture = function() {
-  const NAMES = getAuthorsName(GENERATE_NAME);
-  const avatar = `img/avatar-${id}.svg`;
   id = generateId();
   const url = `photos/${id}.jpg`;
   const descriptionArray = pickItems(description);
   const likes = generateLikesInteger(15, 200);
-  const comments = createPictureCommentsArray();
+  const comments = createPictureCommentsArray(generateLikesInteger(10, 100));
 
-  return {NAMES, avatar, id, url, descriptionArray, likes, comments};
+  return {id, url, descriptionArray, likes, comments};
 };
-
 
 
 const createPictureArray = function(length = 25) {
@@ -55,24 +50,15 @@ const createPictureArray = function(length = 25) {
 createPictureArray(LENGTH);
 
 
-
 /**
  * @param {Array}
- * @returns {Array<Comment>}
+ * @returns {Array<createPictureComment>}
  */
-function createPictureCommentsArray() {
-  const length = Math.floor(Math.random() * 10) + 1;
+function createPictureCommentsArray(length) {
+  const array = new Array(length).fill(1);
 
-  const array = new Array(length).fill().map((item = 25) => createPictureComment(item));
-
-  return array;
+  return array.map((item) => createPictureComment(item));
 }
-createPictureCommentsArray(message);
-
-export default createPictureCommentsArray;
-
-
-
 
 /**
  * @param {number} min
@@ -83,21 +69,18 @@ export function generateLikesInteger (min, max) {
   const value = min + Math.random() * (max - min);
   return Math.round(value);
 }
-generateLikesInteger();
-
-
 
 
 /**
- * @param {Array}
+ * @param {number} id
  * @returns {string}
  */
-export function createPictureComment() {
-  const randomIndex = Math.floor(Math.random() * message.length);
-  const result = message[randomIndex];
+export function createPictureComment(id) {
+  const avatar = `img/avatar-${generateLikesInteger(1, 6)}.svg`;
+  const comments = pickItems(message);
+  const NAMES = getAuthorsName(GENERATE_NAME);
 
-  return result;
+  return {id, avatar, comments, NAMES};
 }
-createPictureComment(message);
-//console.log(createPictureComment(), createPicture(), createPictureCommentsArray());
+
 export { createPicture, createPictureCommentsArray, createPictureArray };
