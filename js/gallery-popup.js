@@ -11,6 +11,7 @@ let renderNextComments;
  */
 function hideModal(modalWindow) {
   modalWindow.classList.add('hidden');
+  modalWindow.dispatchEvent(new Event('hide'));
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
@@ -25,7 +26,6 @@ function showModal(modalWindow) {
 }
 
 /**
- * 
  * @param {MouseEvent & {target: Element, currentTarget: Element}} event
  */
 function hideModalByClick(event) {
@@ -35,10 +35,13 @@ function hideModalByClick(event) {
 }
 
 /**
- * @param {KeyboardEvent} event
+ * @param {KeyboardEvent & {target: Element}} event
  */
 function onDocumentKeydown(event) {
-  if(event.key && event.key.startsWith('Esc')) {
+  const isEscapeKey = event.key.startsWith('Esc');
+  const isTextField = event.target.matches('input[type="text"], textarea');
+
+  if(event.key && isEscapeKey && !isTextField) {
     hideModal(document.querySelector('.overlay:not(.hidden)'));
   }
 }
@@ -46,7 +49,6 @@ function onDocumentKeydown(event) {
 export { showModal, hideModal, hideModalByClick, renderPopups };
 
 /**
- * 
  * @param { createPicture } data
  */
 function renderPopups(data) {

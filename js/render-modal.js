@@ -12,6 +12,7 @@ function renderModal(data) {
   modalOpenedPicture.addEventListener('click', onPopupClick);
 }
 
+// Функция закрытия модалки через клик
 function hideModalHandler() {
   if(document.body.classList.contains('modal-open')) {
     hideModal(modalOpenedPicture);
