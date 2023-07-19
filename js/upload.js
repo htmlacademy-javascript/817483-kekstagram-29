@@ -1,20 +1,35 @@
-import renderModal from './render-modal.js';
+import renderPopup from './upload-popup.js';
+import './pristine-validators.js';
 
 /**
  * @type {HTMLFormElement}
  */
 const form = document.querySelector('.img-upload__form');
-// console.log(form);
+const pristine = new Pristine(form, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper'
+});
 
 form.addEventListener('change', onFormChange);
+form.addEventListener('hide', onFormHide, true);
+form.addEventListener('reset', onFormReset);
+
 /**
- * 
  * @param {Event && {target: HTMLInputElement}} event
  */
 function onFormChange(event) {
   if(event.target.matches('#upload-file')) {
-    // console.log(event.target.files);
+    console.log(event.target.files);
     const [data] = event.target.files;
-    renderModal(data);
+    renderPopup(data);
   }
+}
+renderPopup();
+
+function onFormHide() {
+  form.reset();
+}
+
+function onFormReset() {
+  pristine.reset();
 }
