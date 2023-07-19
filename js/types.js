@@ -1,11 +1,16 @@
 /** \
- * @typedef createTemplate
+ * @typedef createPicture
  * @prop { number } id
  * @prop { string } url
- * @prop { string } description
+ * @prop { string } descriptionArray
+ * @prop { number } likes
  * @prop { Array } comments
  */
 
 /** /
- * @typedef pictureComments
+ * @typedef createPictureComment
+ * @prop { number } id
+ * @prop { string } avatar
+ * @prop { Array } comments
+ * @prop { string } NAMES
  */
