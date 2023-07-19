@@ -41,7 +41,7 @@ const createPicture = function() {
   const url = `photos/${id}.jpg`;
   const descriptionArray = pickItems(description);
   const likes = generateLikesInteger(15, 200);
-  const comments = createPictureComment();
+  const comments = createPictureCommentsArray();
 
   return {NAMES, avatar, id, url, descriptionArray, likes, comments};
 };
@@ -62,12 +62,14 @@ createPictureArray(LENGTH);
  */
 function createPictureCommentsArray() {
   const length = Math.floor(Math.random() * 10) + 1;
-  console.log(length);
+
   const array = new Array(length).fill().map((item = 25) => createPictureComment(item));
 
   return array;
 }
 createPictureCommentsArray(message);
+
+export default createPictureCommentsArray;
 
 
 

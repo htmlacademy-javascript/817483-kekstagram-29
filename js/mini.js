@@ -1,3 +1,4 @@
+import renderModal from './render-modal.js';
 const pictureContainer = document.querySelector('.pictures');
 /**
  * @type {HTMLTemplateElement}
@@ -13,25 +14,33 @@ const pictureThumbnail = document.querySelector('#picture');
  * @prop {string} description
  * @returns {Object} thumbnail
  */
-const createTemplate = ({comments, likes, url, description}) => {
+const createTemplate = (data) => {
 
-  const thumbnail = /** @type {HTMLAnchorElement} */ (pictureThumbnail.content.cloneNode(true));
-  thumbnail.querySelector('.picture__img').src = url;
-  thumbnail.querySelector('.picture__img').alt = description;
-  thumbnail.querySelector('.picture__comments').textContent = comments.length;
-  thumbnail.querySelector('.picture__likes').textContent = likes;
+  const thumbnail = /** @type {HTMLAnchorElement} */ (pictureThumbnail.content.querySelector('.picture').cloneNode(true));
+  thumbnail.querySelector('.picture__img').setAttribute('src', data.url);
+  thumbnail.querySelector('.picture__img').setAttribute('alt', data.description);
+  thumbnail.querySelector('.picture__comments').textContent = data.comments.length;
+  thumbnail.querySelector('.picture__likes').textContent = data.likes;
 
+  thumbnail.addEventListener('click', (event)=> {
+    event.preventDefault();
+    renderModal(data);
+  });
   return thumbnail;
 };
 
-const renderPictures = (pictures) => {
-  const fragment = document.createDocumentFragment();
+function createThumbnail(data) {
+  pictureContainer.append(...data.map(createTemplate));
+}
+export { createThumbnail };
+// const renderPictures = (pictures) => {
+//   const fragment = document.createDocumentFragment();
 
-  pictures.forEach(item=> {
-    const thumbnail = createTemplate(item);
-    fragment.append(thumbnail);
-  });
-  pictureContainer.append(fragment);
-};
+//   pictures.forEach(item=> {
+//     const thumbnail = createTemplate(item);
+//     fragment.append(thumbnail);
+//   });
+//   pictureContainer.append(fragment);
+// };
 
-export { renderPictures };
+// export { renderPictures, createTemplate };
