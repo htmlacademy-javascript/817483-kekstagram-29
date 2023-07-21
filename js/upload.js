@@ -24,7 +24,7 @@ function onFormChange(event) {
     renderPopup(data);
   }
 }
-renderPopup();
+// renderPopup();
 
 function onFormHide() {
   form.reset();

@@ -5,6 +5,7 @@ const popup = document.querySelector('.img-upload__overlay');
 const scaleControl = initScaleControl(popup.querySelector('.scale'));
 console.log(scaleControl)
 const effectSlider = initEffectSlider(popup.querySelector('.effect-level'));
+console.log(effectSlider);
 const effectPicker = popup.querySelector('.effects');
 const preview = popup.querySelector('img');
 

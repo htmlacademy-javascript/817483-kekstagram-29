@@ -4,7 +4,6 @@
  */
 function initEffectSlider(target) {
   // @ts-ignore
-  console.log(target);
   const slider = noUiSlider.create(target.querySelector('div'), createOptions());
   const level = target.querySelector('input');
 
