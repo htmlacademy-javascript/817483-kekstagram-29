@@ -1,5 +1,6 @@
 import renderPopup from './upload-popup.js';
 import './pristine-validators.js';
+import { request } from './util.js';
 
 /**
  * @type {HTMLFormElement}
@@ -13,6 +14,7 @@ const pristine = new Pristine(form, {
 form.addEventListener('change', onFormChange);
 form.addEventListener('hide', onFormHide, true);
 form.addEventListener('reset', onFormReset);
+form.addEventListener('submit', onFormSubmit);
 
 /**
  * @param {Event && {target: HTMLInputElement}} event
@@ -33,3 +35,39 @@ function onFormHide() {
 function onFormReset() {
   pristine.reset();
 }
+
+/**
+ * @param { SubmitEvent } event
+ */
+async function onFormSubmit(event) {
+  event.preventDefault();
+  if(!pristine.validate()) {
+    return;
+  }
+  setSubmitBlock(true);
+  await sendFormData();
+  resetFormOnHideModal();
+  setSubmitBlock(false);
+}
+
+
+async function sendFormData() {
+  const url = form.getAttribute('action');
+  const method = form.getAttribute('method');
+  const body = new FormData(form);
+
+  await request(url, {method, body});
+}
+
+/**
+ * @param { Boolean } flag
+ */
+function setSubmitBlock(flag) {
+  form['upload-submit'].toggleAttribute('disabled', flag);
+}
+
+function resetFormOnHideModal() {
+  form['upload-cancel'].click();
+}
+
+// Доработать функцию закрытия модального окна после добавления картинки, т.к. работает только Esc, у меня функция не была настроена на нужный класс. Получается, я обработчик навесил только на другую модалку
