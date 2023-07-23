@@ -2,6 +2,7 @@ import renderPopup from './upload-popup.js';
 import './pristine-validators.js';
 import { request } from './util.js';
 import { renderStatus } from './status.js';
+import renderModal from './render-modal.js';
 
 /**
  * @type {HTMLFormElement}
@@ -22,9 +23,21 @@ form.addEventListener('submit', onFormSubmit);
  */
 function onFormChange(event) {
   if(event.target.matches('#upload-file')) {
-    // console.log(event.target.files);
     const [data] = event.target.files;
-    renderPopup(data);
+    const types = event.target.getAttribute('accept').split(', ');
+    console.log(types, data);
+    if(types.some((it) => data.name.endsWith(it))) {
+      renderPopup(data);
+    } else {
+      const title = 'Неподдерживаемый формат';
+      const button = 'Другой формат нужен';
+
+      renderStatus('error', {title, button});
+
+      onFormHide();
+    }
+
+    // renderPopup(data);
   }
 }
 // renderPopup();
