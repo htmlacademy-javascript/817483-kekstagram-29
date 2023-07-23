@@ -1,6 +1,7 @@
 import renderPopup from './upload-popup.js';
 import './pristine-validators.js';
 import { request } from './util.js';
+import { renderStatus } from './status.js';
 
 /**
  * @type {HTMLFormElement}
@@ -21,7 +22,7 @@ form.addEventListener('submit', onFormSubmit);
  */
 function onFormChange(event) {
   if(event.target.matches('#upload-file')) {
-    console.log(event.target.files);
+    // console.log(event.target.files);
     const [data] = event.target.files;
     renderPopup(data);
   }
@@ -44,10 +45,16 @@ async function onFormSubmit(event) {
   if(!pristine.validate()) {
     return;
   }
-  setSubmitBlock(true);
-  await sendFormData();
-  resetFormOnHideModal();
-  setSubmitBlock(false);
+  try {
+    setSubmitBlock(true);
+    await sendFormData();
+    resetFormOnHideModal();
+    renderStatus('success');
+  } catch {
+    renderStatus('error');
+  } finally {
+    setSubmitBlock(false);
+  }
 }
 
 

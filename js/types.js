@@ -39,3 +39,8 @@
 /**
  * @typedef {'none' | 'chrome' | 'sepia' | 'marvin' | 'phobos' | 'heat'} EffectType
  */
+
+
+/**
+ * @typedef {'success' | 'error'} StatusType
+ */
