@@ -1,7 +1,8 @@
 // import { createPicture } from "./util.js";
-
+const cancelUploadModal = document.querySelector('.cancel');
+console.log(cancelUploadModal);
 const body = document.querySelector('body');
-const cancelButton = document.querySelector('.big-picture__cancel');
+// const cancelButton = document.querySelector('.big-picture__cancel');
 const modalPicture = document.querySelector('.big-picture');
 const commentTemplate = modalPicture.querySelector('.social__comment');
 
@@ -108,3 +109,10 @@ function onPopupClick(event) {
     renderNextComments();
   }
 }
+
+// function onUploadModalClick() {
+//   if(document.body.classList.contains('modal-open')) {
+//     document.body.classList.remove('modal-open');
+//   }
+// } НЕ РАБОТАЕТ
+// cancelUploadModal.addEventListener('click', onUploadModalClick);

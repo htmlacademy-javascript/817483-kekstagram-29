@@ -1,3 +1,4 @@
+// const cancelUploadModal = document.querySelector('.cancel');
 /**
  * @param {StatusType} type
  * @param {StatusOptions} options
@@ -55,5 +56,12 @@ function onDocumentKeydown(event) {
     event.stopPropagation();
   }
 }
+
+// function onUploadModalClick() {
+//   if(cancelUploadModal) {
+//     document.body.classList.remove('modal-open');
+//   }
+// }
+// cancelUploadModal.addEventListener('click', onUploadModalClick);
 
 export { renderStatus };
