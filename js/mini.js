@@ -1,5 +1,6 @@
 import renderModal from './render-modal.js';
 import { renderPopups } from './gallery-popup.js';
+import { throttle } from './util.js';
 const pictureContainer = document.querySelector('.pictures');
 /**
  * @type {HTMLTemplateElement}
@@ -14,12 +15,12 @@ function initiateGallery(data) {
   menuGallery.classList.remove('img-filters--inactive');
   menuGallery.addEventListener('click', onMenuClick);
 
-  menuGallery.addEventListener('toggle', (event) => {
+  menuGallery.addEventListener('toggle', throttle((event) => {
     const selectedButton = /** @type {HTMLButtonElement} */ (event.target);
     const selectedValue = /** @type {FilterType} */ (selectedButton.getAttribute('value'));
 
     createThumbnail(filter(selectedValue));
-  }, true);
+  }), true);
 
   createThumbnail(data);
 }
