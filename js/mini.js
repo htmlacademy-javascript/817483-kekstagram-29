@@ -6,6 +6,34 @@ const pictureContainer = document.querySelector('.pictures');
  */
 const pictureThumbnail = document.querySelector('#picture');
 
+const menuGallery = document.querySelector('.img-filters');
+
+function initiateGallery(data) {
+  menuGallery.classList.remove('img-filters--inactive');
+  menuGallery.addEventListener('click', onMenuClick);
+  createThumbnail(data);
+}
+
+/**
+ * 
+ * @param {MouseEvent & {target: Element}} event
+ */
+function onMenuClick(event) {
+  const selectedButton = event.target.closest('button');
+
+  if(selectedButton) {
+    menuGallery.querySelectorAll('button').forEach((button) => {
+      button.classList.toggle('img-filters__button--active', button === selectedButton);
+      // Без переменной eslint ругается let result = button === selectedButton ? button.classList.add('img-filters__button--active') : button.classList.remove('img-filters__button--active');
+      // if(button === selectedButton) {
+      //   button.classList.toggle('img-filters__button--active');
+      // } else {
+      //   button.classList.remove('img-filters__button--active'); 
+      // }
+    });
+    selectedButton.dispatchEvent(new Event('toggle'));
+  }
+}
 /**
  * @prop {Array} comments
  * @prop {number} likes
@@ -32,4 +60,4 @@ const createTemplate = (data) => {
 function createThumbnail(data) {
   pictureContainer.append(...data.map(createTemplate));
 }
-export { createThumbnail };
+export { initiateGallery };
