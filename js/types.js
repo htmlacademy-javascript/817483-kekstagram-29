@@ -39,3 +39,19 @@
 /**
  * @typedef {'none' | 'chrome' | 'sepia' | 'marvin' | 'phobos' | 'heat'} EffectType
  */
+
+
+/**
+ * @typedef {'success' | 'error'} StatusType
+ */
+
+
+/**
+ * @typedef StatusOptions
+ * @prop {string} [title]
+ * @prop {string} [button]
+ */
+
+/**
+ * @typedef {'default' | 'random' | 'discussed'}  FilterType
+ */

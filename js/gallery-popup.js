@@ -1,7 +1,8 @@
-import { createPicture } from "./util.js";
-
+// import { createPicture } from "./util.js";
+const cancelUploadModal = document.querySelector('.cancel');
+console.log(cancelUploadModal);
 const body = document.querySelector('body');
-const cancelButton = document.querySelector('.big-picture__cancel');
+// const cancelButton = document.querySelector('.big-picture__cancel');
 const modalPicture = document.querySelector('.big-picture');
 const commentTemplate = modalPicture.querySelector('.social__comment');
 
@@ -52,10 +53,10 @@ export { showModal, hideModal, hideModalByClick, renderPopups };
  * @param { createPicture } data
  */
 function renderPopups(data) {
-
+  console.log(data)
   modalPicture.querySelector('.big-picture__img img').setAttribute('src', data.url);
 
-  modalPicture.querySelector('.social__caption').textContent = data.descriptionArray;
+  modalPicture.querySelector('.social__caption').textContent = String(data.description);
   modalPicture.querySelector('.likes-count').textContent = String(data.likes);
 
   renderNextComments = createCommentsRenderer(data.comments);
@@ -91,11 +92,11 @@ function createCommentsRenderer(data, step = 5) {
  * @param { createPictureComment } data
  */
 function createComment(data) {
-
+  // console.log(data)
   const comment = /** @type {HTMLLIElement} */ (commentTemplate.cloneNode(true));
   comment.querySelector('.social__picture').setAttribute('src', data.avatar);
-  comment.querySelector('.social__picture').setAttribute('alt', data.NAMES);
-  comment.querySelector('.social__text').textContent = String(data.comments);
+  comment.querySelector('.social__picture').setAttribute('alt', data.name);
+  comment.querySelector('.social__text').textContent = String(data.message);
 
   return comment;
 }
@@ -108,3 +109,10 @@ function onPopupClick(event) {
     renderNextComments();
   }
 }
+
+// function onUploadModalClick() {
+//   if(document.body.classList.contains('modal-open')) {
+//     document.body.classList.remove('modal-open');
+//   }
+// } НЕ РАБОТАЕТ
+// cancelUploadModal.addEventListener('click', onUploadModalClick);
