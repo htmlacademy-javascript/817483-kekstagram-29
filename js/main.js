@@ -8,7 +8,7 @@ try {
  * @type { Array }
  */
   const data = await request('https://29.javascript.pages.academy/kekstagram/data');
-
+  console.log(data);
   initiateGallery(data);
 
 } catch(error) {

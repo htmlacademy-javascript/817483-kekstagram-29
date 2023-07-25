@@ -54,7 +54,6 @@ export { showModal, hideModal, renderPopups };
  * @param { createPicture } data
  */
 function renderPopups(data) {
-
   modalPicture.querySelector('.big-picture__img img').setAttribute('src', data.url);
   // @ts-ignore
   modalPicture.querySelector('.social__caption').textContent = String(data.description);
