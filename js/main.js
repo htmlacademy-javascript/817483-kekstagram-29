@@ -1,4 +1,4 @@
-import { initiateGallery } from './mini.js';
+import { initiateGallery } from './gallery.js';
 import './upload.js';
 import { request } from './util.js';
 import { renderStatus } from './status.js';
