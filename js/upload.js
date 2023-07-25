@@ -37,10 +37,8 @@ function onFormChange(event) {
       onFormHide();
     }
 
-    // renderPopup(data);
   }
 }
-// renderPopup();
 
 function onFormHide() {
   form.reset();
