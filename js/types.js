@@ -11,8 +11,8 @@
  * @typedef createPictureComment
  * @prop { number } id
  * @prop { string } avatar
- * @prop { Array } comments
- * @prop { string } NAMES
+ * @prop { Array } message
+ * @prop { string } name
  */
 
 /**

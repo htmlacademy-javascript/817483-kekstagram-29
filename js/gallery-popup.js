@@ -1,6 +1,6 @@
 // import { createPicture } from "./util.js";
 const cancelUploadModal = document.querySelector('.cancel');
-console.log(cancelUploadModal);
+// console.log(cancelUploadModal);
 const body = document.querySelector('body');
 // const cancelButton = document.querySelector('.big-picture__cancel');
 const modalPicture = document.querySelector('.big-picture');
@@ -26,14 +26,14 @@ function showModal(modalWindow) {
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
-/**
- * @param {MouseEvent & {target: Element, currentTarget: Element}} event
- */
-function hideModalByClick(event) {
-  // if(cancelButton) {
-  //   hideModal(event.currentTarget);
-  // }
-}
+// /**
+//  * @param {MouseEvent & {target: Element, currentTarget: Element}}
+//  */
+// function hideModalByClick() {
+//   // if(cancelButton) {
+//   //   hideModal(event.currentTarget);
+//   // }
+// }
 
 /**
  * @param {KeyboardEvent & {target: Element}} event
@@ -47,15 +47,15 @@ function onDocumentKeydown(event) {
   }
 }
 
-export { showModal, hideModal, hideModalByClick, renderPopups };
+export { showModal, hideModal, renderPopups };
 
 /**
  * @param { createPicture } data
  */
 function renderPopups(data) {
-  console.log(data)
+  // console.log(data)
   modalPicture.querySelector('.big-picture__img img').setAttribute('src', data.url);
-
+  // @ts-ignore
   modalPicture.querySelector('.social__caption').textContent = String(data.description);
   modalPicture.querySelector('.likes-count').textContent = String(data.likes);
 
