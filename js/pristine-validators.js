@@ -16,7 +16,7 @@ addValidator('words-maxlength', (value, limit) => {
   const words = segmentWords(value);
   const maxLength = Number(limit);
 
-  return words.every(item => item.length <= maxLength);
+  return words.every((item) => item.length <= maxLength);
 });
 
 addValidator('max-words', (value, limit) => {
@@ -24,7 +24,7 @@ addValidator('max-words', (value, limit) => {
   const maxLength = Number(limit);
 
   return words.length <= maxLength;
-})
+});
 /**
  * @param {string} name
  * @param {(...args: Array<string>) => boolean} validator

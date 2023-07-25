@@ -1,8 +1,5 @@
-// import { createPicture } from "./util.js";
-const cancelUploadModal = document.querySelector('.cancel');
-// console.log(cancelUploadModal);
 const body = document.querySelector('body');
-// const cancelButton = document.querySelector('.big-picture__cancel');
+
 const modalPicture = document.querySelector('.big-picture');
 const commentTemplate = modalPicture.querySelector('.social__comment');
 

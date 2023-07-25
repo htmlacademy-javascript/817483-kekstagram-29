@@ -63,7 +63,7 @@ function onMenuClick(event) {
       // if(button === selectedButton) {
       //   button.classList.toggle('img-filters__button--active');
       // } else {
-      //   button.classList.remove('img-filters__button--active'); 
+      //   button.classList.remove('img-filters__button--active');
       // }
     });
     selectedButton.dispatchEvent(new Event('toggle'));
