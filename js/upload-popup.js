@@ -1,5 +1,5 @@
-import { showModal } from "./gallery-popup.js";
-import initScaleControl from "./scale-control.js";
+import { showModal } from './gallery-popup.js';
+import initScaleControl from './scale-control.js';
 import initEffectSlider from './effect-slider.js';
 const popup = document.querySelector('.img-upload__overlay');
 const scaleControl = initScaleControl(popup.querySelector('.scale'));
@@ -14,9 +14,7 @@ const preview = popup.querySelector('img');
  * @param {File} data
  */
 function renderPopup(data) {
-  // TODO: подстановка изображения
-  void data;
-
+  setPreviewUrl(URL.createObjectURL(data));
   scaleControl.on('update', onScaleControlUpdate);
   scaleControl.setValue(100);
 
@@ -25,6 +23,16 @@ function renderPopup(data) {
 
   effectPicker.addEventListener('change', onEffectPickerChange);
   showModal(popup);
+}
+
+/**
+ * @param {string} url
+ */
+function setPreviewUrl(url) {
+  preview.setAttribute('src', url);
+  effectPicker.querySelectorAll('span').forEach((picture) => {
+    picture.style.setProperty('background-image', `url(${url})`);
+  });
 }
 
 
