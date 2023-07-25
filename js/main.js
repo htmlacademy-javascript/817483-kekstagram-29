@@ -18,6 +18,4 @@ initiateGallery(data);
 
   renderStatus('error', {title, button});
 }
-function testFunc() {
 
-};
