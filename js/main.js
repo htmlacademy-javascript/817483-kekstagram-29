@@ -7,10 +7,9 @@ try {
   /**
  * @type { Array }
  */
-const data = await request('https://29.javascript.pages.academy/kekstagram/data');
-console.log(data);
+  const data = await request('https://29.javascript.pages.academy/kekstagram/data');
 
-initiateGallery(data);
+  initiateGallery(data);
 
 } catch(error) {
   const title = `Ошибка: ${error.message}`;
