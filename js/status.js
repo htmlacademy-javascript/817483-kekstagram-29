@@ -50,7 +50,7 @@ function onStatusClick(event) {
 function onDocumentKeydown(event) {
   const isEscapeKey = event.key.startsWith('Esc');
 
-  if(event.key && isEscapeKey) {
+  if(isEscapeKey) {
     hideStatus(document.querySelector('.error, .success'));
     event.stopPropagation();
   }
