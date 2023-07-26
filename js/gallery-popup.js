@@ -15,11 +15,11 @@ function hideModal(modalWindow) {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydown);
-  cancelGalleryMenu.removeEventListener('click', onCancelGalleryMenu);
-  cancelBigPicture.removeEventListener('click', onCancelBigPicture);
+  cancelGalleryMenu.removeEventListener('click', onCancelGalleryMenuClick);
+  cancelBigPicture.removeEventListener('click', onCancelBigPictureClick);
 }
 
-function onCancelBigPicture() {
+function onCancelBigPictureClick() {
   if(document.body.classList.contains('modal-open')) {
     hideModal(modalPicture);
   }
@@ -32,14 +32,14 @@ function showModal(modalWindow) {
   modalWindow.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-  cancelGalleryMenu.addEventListener('click', onCancelGalleryMenu);
-  cancelBigPicture.addEventListener('click', onCancelBigPicture);
+  cancelGalleryMenu.addEventListener('click', onCancelGalleryMenuClick);
+  cancelBigPicture.addEventListener('click', onCancelBigPictureClick);
 }
 
 /**
  * @param {MouseEvent & {target: Element, currentTarget: Element}} event
  */
-function onCancelGalleryMenu(event) {
+function onCancelGalleryMenuClick(event) {
   if(event.target === cancelGalleryMenu) {
     hideModal(document.querySelector('.overlay:not(.hidden)'));
   }
