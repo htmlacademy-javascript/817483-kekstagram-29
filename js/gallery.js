@@ -1,5 +1,4 @@
-import renderModal from './render-modal.js';
-import { renderPopups } from './gallery-popup.js';
+import { renderPopup } from './gallery-popup.js';
 import { throttle } from './util.js';
 const pictureContainer = document.querySelector('.pictures');
 /**
@@ -7,29 +6,28 @@ const pictureContainer = document.querySelector('.pictures');
  */
 const pictureThumbnail = document.querySelector('#picture');
 
-const menuGallery = document.querySelector('.img-filters');
+const galleryMenu = document.querySelector('.img-filters');
 
 function initiateGallery(data) {
   const filter = createFilter(data);
 
-  menuGallery.classList.remove('img-filters--inactive');
-  menuGallery.addEventListener('click', onMenuClick);
+  galleryMenu.classList.remove('img-filters--inactive');
+  galleryMenu.addEventListener('click', onGalleryMenuClick);
 
-  menuGallery.addEventListener('toggle', throttle((event) => {
+  galleryMenu.addEventListener('toggle', throttle((event) => {
     const selectedButton = /** @type {HTMLButtonElement} */ (event.target);
     const selectedValue = /** @type {FilterType} */ (selectedButton.getAttribute('value'));
 
-    createThumbnail(filter(selectedValue));
+    renderThumbnails(filter(selectedValue));
   }), true);
 
-  createThumbnail(data);
+  renderThumbnails(data);
 }
-
 
 /**
  * @param {{randomLimit?: number}} options
- * @param {Array <createPicture>} data
- * @returns {(type: FilterType) => Array <createPicture>}
+ * @param {Array <CreatePicture>} data
+ * @returns {(type: FilterType) => Array <CreatePicture>}
  */
 function createFilter(data, options = {}) {
 
@@ -53,11 +51,11 @@ function createFilter(data, options = {}) {
 /**
  * @param {MouseEvent & {target: Element}} event
  */
-function onMenuClick(event) {
+function onGalleryMenuClick(event) {
   const selectedButton = event.target.closest('button');
 
   if(selectedButton) {
-    menuGallery.querySelectorAll('button').forEach((button) => {
+    galleryMenu.querySelectorAll('button').forEach((button) => {
       button.classList.toggle('img-filters__button--active', button === selectedButton);
     });
     selectedButton.dispatchEvent(new Event('toggle'));
@@ -80,13 +78,12 @@ const createTemplate = (data) => {
 
   thumbnail.addEventListener('click', (event)=> {
     event.preventDefault();
-    renderPopups(data);
-    renderModal(data);
+    renderPopup(data);
   });
   return thumbnail;
 };
 
-function createThumbnail(data) {
+function renderThumbnails(data) {
   pictureContainer.querySelectorAll('.picture').forEach((picture) => picture.remove());
   pictureContainer.append(...data.map(createTemplate));
 }

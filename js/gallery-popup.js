@@ -2,7 +2,8 @@ const body = document.querySelector('body');
 
 const modalPicture = document.querySelector('.big-picture');
 const commentTemplate = modalPicture.querySelector('.social__comment');
-const cancelButton = document.querySelector('.img-upload__cancel');
+const cancelGalleryMenu = document.querySelector('.img-upload__cancel');
+const cancelBigPicture = document.querySelector('.big-picture__cancel');
 
 let renderNextComments;
 /**
@@ -14,7 +15,14 @@ function hideModal(modalWindow) {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', onDocumentKeydown);
-  cancelButton.removeEventListener('click', onHideModalByClick);
+  cancelGalleryMenu.removeEventListener('click', onCancelGalleryMenu);
+  cancelBigPicture.removeEventListener('click', onCancelBigPicture);
+}
+
+function onCancelBigPicture() {
+  if(document.body.classList.contains('modal-open')) {
+    hideModal(modalPicture);
+  }
 }
 
 /**
@@ -24,14 +32,15 @@ function showModal(modalWindow) {
   modalWindow.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-  cancelButton.addEventListener('click', onHideModalByClick);
+  cancelGalleryMenu.addEventListener('click', onCancelGalleryMenu);
+  cancelBigPicture.addEventListener('click', onCancelBigPicture);
 }
 
 /**
  * @param {MouseEvent & {target: Element, currentTarget: Element}} event
  */
-function onHideModalByClick(event) {
-  if(event.target === cancelButton) {
+function onCancelGalleryMenu(event) {
+  if(event.target === cancelGalleryMenu) {
     hideModal(document.querySelector('.overlay:not(.hidden)'));
   }
 }
@@ -43,17 +52,15 @@ function onDocumentKeydown(event) {
   const isEscapeKey = event.key.startsWith('Esc');
   const isTextField = event.target.matches('input[type="text"], textarea');
 
-  if(event.key && isEscapeKey && !isTextField) {
+  if(isEscapeKey && !isTextField) {
     hideModal(document.querySelector('.overlay:not(.hidden)'));
   }
 }
 
-export { showModal, hideModal, renderPopups };
-
 /**
- * @param { createPicture } data
+ * @param { CreatePicture } data
  */
-function renderPopups(data) {
+function renderPopup(data) {
   modalPicture.querySelector('.big-picture__img img').setAttribute('src', data.url);
   // @ts-ignore
   modalPicture.querySelector('.social__caption').textContent = String(data.description);
@@ -66,7 +73,7 @@ function renderPopups(data) {
 }
 
 /**
- * @param { Array <createPictureComment> } data
+ * @param { Array <CreatePictureComment> } data
  * @param { number } step
  */
 function createCommentsRenderer(data, step = 5) {
@@ -89,7 +96,7 @@ function createCommentsRenderer(data, step = 5) {
 }
 
 /**
- * @param { createPictureComment } data
+ * @param { CreatePictureComment } data
  */
 function createComment(data) {
 
@@ -109,3 +116,5 @@ function onPopupClick(event) {
     renderNextComments();
   }
 }
+
+export { showModal, hideModal, renderPopup };

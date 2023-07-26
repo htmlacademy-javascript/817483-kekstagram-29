@@ -1,14 +1,14 @@
 /** \
- * @typedef createPicture
+ * @typedef CreatePicture
  * @prop { number } id
  * @prop { string } url
- * @prop { string } descriptionArray
+ * @prop { string } description
  * @prop { number } likes
  * @prop { Array } comments
  */
 
 /** /
- * @typedef createPictureComment
+ * @typedef CreatePictureComment
  * @prop { number } id
  * @prop { string } avatar
  * @prop { Array } message
