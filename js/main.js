@@ -5,7 +5,7 @@ import { renderStatus } from './status.js';
 
 try {
   /**
- * @type { Array }
+ * @type { Array<CreatePicture> }
  */
   const data = await request('https://29.javascript.pages.academy/kekstagram/data');
 
