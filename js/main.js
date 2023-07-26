@@ -17,6 +17,4 @@ try {
 
   renderStatus('error', {title, button});
 }
-function testFunc() {
 
-};
