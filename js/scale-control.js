@@ -23,7 +23,6 @@ function initScaleControl(target, options = {}) {
   /**
    * @returns {number}
    */
-  // принимает значение value нашего инпута, трасформирует в число
   function getValue() {
     return Number.parseFloat(input.getAttribute('value'));
   }
