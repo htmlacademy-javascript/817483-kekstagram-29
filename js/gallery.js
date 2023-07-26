@@ -59,12 +59,6 @@ function onMenuClick(event) {
   if(selectedButton) {
     menuGallery.querySelectorAll('button').forEach((button) => {
       button.classList.toggle('img-filters__button--active', button === selectedButton);
-      // Без переменной eslint ругается let result = button === selectedButton ? button.classList.add('img-filters__button--active') : button.classList.remove('img-filters__button--active');
-      // if(button === selectedButton) {
-      //   button.classList.toggle('img-filters__button--active');
-      // } else {
-      //   button.classList.remove('img-filters__button--active');
-      // }
     });
     selectedButton.dispatchEvent(new Event('toggle'));
   }

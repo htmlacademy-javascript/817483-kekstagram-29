@@ -2,6 +2,7 @@ const body = document.querySelector('body');
 
 const modalPicture = document.querySelector('.big-picture');
 const commentTemplate = modalPicture.querySelector('.social__comment');
+const cancelButton = document.querySelector('.img-upload__cancel');
 
 let renderNextComments;
 /**
@@ -11,7 +12,9 @@ function hideModal(modalWindow) {
   modalWindow.classList.add('hidden');
   modalWindow.dispatchEvent(new Event('hide'));
   body.classList.remove('modal-open');
+
   document.removeEventListener('keydown', onDocumentKeydown);
+  cancelButton.removeEventListener('click', onHideModalByClick);
 }
 
 /**
@@ -21,16 +24,17 @@ function showModal(modalWindow) {
   modalWindow.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  cancelButton.addEventListener('click', onHideModalByClick);
 }
 
-// /**
-//  * @param {MouseEvent & {target: Element, currentTarget: Element}}
-//  */
-// function hideModalByClick() {
-//   // if(cancelButton) {
-//   //   hideModal(event.currentTarget);
-//   // }
-// }
+/**
+ * @param {MouseEvent & {target: Element, currentTarget: Element}} event
+ */
+function onHideModalByClick(event) {
+  if(event.target === cancelButton) {
+    hideModal(document.querySelector('.overlay:not(.hidden)'));
+  }
+}
 
 /**
  * @param {KeyboardEvent & {target: Element}} event
@@ -50,7 +54,6 @@ export { showModal, hideModal, renderPopups };
  * @param { createPicture } data
  */
 function renderPopups(data) {
-  // console.log(data)
   modalPicture.querySelector('.big-picture__img img').setAttribute('src', data.url);
   // @ts-ignore
   modalPicture.querySelector('.social__caption').textContent = String(data.description);
@@ -89,7 +92,7 @@ function createCommentsRenderer(data, step = 5) {
  * @param { createPictureComment } data
  */
 function createComment(data) {
-  // console.log(data)
+
   const comment = /** @type {HTMLLIElement} */ (commentTemplate.cloneNode(true));
   comment.querySelector('.social__picture').setAttribute('src', data.avatar);
   comment.querySelector('.social__picture').setAttribute('alt', data.name);
@@ -106,10 +109,3 @@ function onPopupClick(event) {
     renderNextComments();
   }
 }
-
-// function onUploadModalClick() {
-//   if(document.body.classList.contains('modal-open')) {
-//     document.body.classList.remove('modal-open');
-//   }
-// } НЕ РАБОТАЕТ
-// cancelUploadModal.addEventListener('click', onUploadModalClick);

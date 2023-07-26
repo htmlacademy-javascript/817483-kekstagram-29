@@ -37,7 +37,6 @@ function setPreviewUrl(url) {
 
 function onScaleControlUpdate() {
   const percent = scaleControl.getValue();
-  // создается переменная, т.к. scale принимает значение от 0 до 1, где 1 - натуральный размер изображения, поэтому 100% делим на 100.
   const ratio = percent / 100;
 
   preview.style.setProperty('transform', `scale(${ratio})`);
